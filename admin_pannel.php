@@ -4,11 +4,11 @@
     session_start();
     $admin_id = $_SESSION['admin_name'];
 
-    if(!isset($admin_id)) {
+    if (!isset($admin_id)) {
         header('location:login.php');
     }
 
-    if(isset($_POST['logout'])) {
+    if (isset($_POST['logout'])) {
         session_destroy();
         header('location:login.php');
     }
@@ -32,7 +32,7 @@
                 <?php
                     $total_pendings = 0;
                     $select_pendings = mysqli_query($conn, "SELECT * FROM 'orders' WHERE payment_status = 'pending'") or die('query failed');
-                    while($fetch_pending = mysqli_fetch_assoc($select_pendings)) {
+                    while ($fetch_pending = mysqli_fetch_assoc($select_pendings)) {
                         $total_pendings += $fetch_pending['total_price'];
                     }
                 ?>
@@ -43,7 +43,7 @@
                 <?php
                     $total_completes = 0;
                     $select_completes = mysqli_query($conn, "SELECT * FROM 'orders' WHERE payment_status = 'complete'") or die('query failed');
-                    while($fetch_completes = mysqli_fetch_assoc($select_completes)) {
+                    while ($fetch_completes = mysqli_fetch_assoc($select_completes)) {
                         $total_completes += $fetch_completes['total_price'];
                     }
                 ?>

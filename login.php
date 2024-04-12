@@ -2,7 +2,7 @@
     include 'connection.php';
     session_start();
 
-    if(isset($_POST['submit-btn'])) {
+    if (isset($_POST['submit-btn'])) {
 
         $filter_email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
         $email = mysqli_real_escape_string($conn, $filter_email);
@@ -12,15 +12,15 @@
 
         $select_user = mysqli_query($conn, "SELECT * FROM 'users' WHERE email = '$email'") or die('query failed');
 
-        if(mysqli_num_rows($select_user)>0) {
+        if (mysqli_num_rows($select_user)>0) {
             $row = mysqli_fetch_assoc($select_user);
-            if($row['user_type']== 'admin') {
+            if ($row['user_type']== 'admin') {
                 $_SESSION['admin_name'] = $row['name'];
                 $_SESSION['admin_email'] = $row['email'];
                 $_SESSION['admin_id'] = $row['id'];
                 header('location:admin_pannel.php');
             }
-            else if($row['user_type']== 'user') {
+            else if ($row['user_type']== 'user') {
                 $_SESSION['user_name'] = $row['name'];
                 $_SESSION['user_email'] = $row['email'];
                 $_SESSION['user_id'] = $row['id'];
@@ -46,7 +46,7 @@
     
     <section class="form-container">
         <?php
-            if(isset($message)) {
+            if (isset($message)) {
                 foreach($message as $message) {
                     echo '
                         <div class="message">
