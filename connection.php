@@ -1,3 +1,7 @@
 <?php
-    $conn = mysqli_connect('localhost', 'root', '', 'shop_db') or die('connection failed');
+    $conn = mysqli_connect('localhost', 'username', 'password', 'shop_db');
+
+    if (!$conn) {
+        die("connection failed: " . mysqli_connect_error());
+    }
 ?>
