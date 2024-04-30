@@ -14,7 +14,7 @@
         $filter_cpassword = filter_var($_POST['cpassword'], FILTER_SANITIZE_STRING);
         $cpassword = mysqli_real_escape_string($conn, $filter_cpassword);
 
-        $query = "SELECT * FROM 'users' WHERE 'email' =?";
+        $query = "SELECT * FROM 'users' WHERE 'email' =$email";
         $stmt = mysqli_prepare($conn, $query);
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
@@ -28,7 +28,7 @@
                 $message[] = 'wrong password';
             }
             else{
-                $query = "INSERT INTO 'users'('name', 'email', 'password') VALUES (?, ?, ?)";
+                $query = "INSERT INTO 'users'('name', 'email', 'password') VALUES ($name, $email, $password)";
                 $stmt = mysqli_prepare($conn, $query);
                 mysqli_stmt_bind_param($stmt, "sss", $name, $email, $password);
                 mysqli_stmt_execute($stmt);
